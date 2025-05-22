@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Practicum {
+public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -39,13 +39,14 @@ public class Practicum {
                         + expensesManager.findMaxExpenseInCategory(category) + " руб.");
             } else if (command == 6) {
                 expensesManager.removeAllExpenses();
-            } ... { // допишите остальные пункты меню
-                System.out.println("Всего потрачено: " + ...);
-            } ... {
+            } else if (command == 7) { // допишите остальные пункты меню
+                System.out.println("Всего потрачено: " + expensesManager.getExpensesSum());
+            } else if (command == 8) {
                 System.out.println("Какую категорию вы хотите удалить?");
                 String category = scanner.next();
-                ...
-            } ... {
+                expensesManager.removeCategory(category);
+            } else if (command == 9) {
+                System.out.println("В категории " + expensesManager.getMaxCategoryName() + " вы потратили больше всего.");
                 // напечатайте фразу "В категории ИМЯ_КАТЕГОРИИ вы потратили больше всего.");
             } else if (command == 0) {
                 System.out.println("Выход");
