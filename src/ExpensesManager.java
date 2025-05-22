@@ -55,39 +55,35 @@ public class ExpensesManager {
         System.out.println("Траты удалены.");
     }
 
-    // напишите метод для получения суммы всех трат
-    double getExpensesSum(){
+    double getExpensesSum() {
+        double result = 0;
+        for (ArrayList<Double> expenses : expensesByCategories.values()) {
+            for (double expense : expenses) {
+                result += expense;
+            }
+        }
+        return result;
+    }
+
+    void removeCategory(String name) {
+        expensesByCategories.remove(name);
+    }
+
+    String getMaxCategoryName() {
+        double maxCategorySum = 0;
+        String maxCategoryName = "";
+
         for (String category : expensesByCategories.keySet()) {
             ArrayList<Double> expenses = expensesByCategories.get(category);
+            double sum = 0;
             for (Double expense : expenses) {
-                maxCategorySum = maxCategorySum + expense;
+                sum += expense;
             }
-
+            if (sum > maxCategorySum) {
+                maxCategorySum = sum;
+                maxCategoryName = category;
+            }
         }
-        return maxCategorySum;
+        return maxCategoryName;
     }
-    // напишите метод для удаления категории
-    void  removeCategory(String category){
-        expensesByCategories.remove(category);
-    }
-    // напишите метод для получения категории, где размер трат больше всего
-    String getMaxCategoryName() {
-        double maxCategoryPreSum;
-        ArrayList<String> catWithSum = null;
-        int maxIndex = 0;
-        for (String category : expensesByCategories.keySet()) {
-            catWithSum = new ArrayList<>();
-            catWithSum.add(category);
-            maxCategoryPreSum = findMaxExpenseInCategory(category);
-            if (maxCategoryPreSum > findMaxExpenseInCategory(category)) {
-                maxCategoryPreSum = findMaxExpenseInCategory(category);
-            }
-            maxIndex = catWithSum.size() - 1;
-
-        } return catWithSum.get(maxIndex);
-    }
-    // используйте эти переменные для сохранения промежуточных значений
-    double maxCategorySum = 0;
-    String maxCategoryName = "";
-
 }
